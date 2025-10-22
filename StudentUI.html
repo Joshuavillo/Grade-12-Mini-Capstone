@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Success College Cebu Online Library</title>
+  <link rel="stylesheet" href="studentStyles.css">
+</head>
+<body>
+  
+	<div class="header">
+	<div style="display: flex; align-items: center;">
+	  <img src="https://lh3.googleusercontent.com/d/1ND0gbYC4SXFcU6dPbZHlrWH4QytKszrY=w200" alt="Avatar">
+	  Golden Success College Cebu Online Library
+ </div>	
+
+	
+
+<div id="sidebar" class="sidebar">
+  <div class="profile-section">
+    <div class="profile-image-container">
+      <img id="profilePicture" src="https://lh3.googleusercontent.com/d/1ND0gbYC4SXFcU6dPbZHlrWH4QytKszrY=w200" alt="Profile Picture">
+    </div>
+    <input type="file" id="profilePictureUpload" accept="image/*" style="display: none;">
+    <button id="changeProfilePicture">Change Picture</button>
+    <h2 class="username">Your Name Here</h2>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a href="student_profile.html">Profile</a></li>
+    <li><a href="Index.html" id="logoutLink">Logout</a></li>
+  </ul>
+</div>
+
+<button id="menuButton">☰ Menu</button>
+ </div>
+ 
+
+ 
+  <div id="termsModal" class="modal">
+	<div class="modal-content">
+	  <button class="close-btn" id="closeModal">&times;</button>
+	  <h2>User Guide & Terms and Conditions</h2>
+	  <p>Welcome to the Golden Success College Cebu Online Library. Please read and accept the terms before proceeding.</p>
+	  <p><strong>User Guide:</strong></p>
+	  <ul>
+		<li>Look for books in the categories.</li>
+		<li>Search for books using the search bar.</li>
+		<li>Borrow available books and track your borrowed items.</li>
+		
+	  </ul>
+	  <p><strong>Terms & Conditions:</strong></p>
+	  <p> 1. Deposit all things outside. Bring in only sheets of paper and pens for notes.</p>
+	  <p> 2. Observe silence. Idle conversations, loud laughter, loitering, eating, group discussions, and all acts of vandalism are strictly prohibited.</p>
+      <p> 3. In order not to annoy other library users, doing activities such as software demo, sewing projects, and industrial activity works are not allowed in the library.</p>
+      <p> 4. Keep things in proper order. Push your chair under the table and return books & periodicals to their proper places.</p>
+      <p> 5. Handle books and other materials with care. They are intended to serve many users after you.</p>  
+      <p> 6. Books are intended to be used at the reading area only. It must not be taken out of the library without proper knowledge by the school librarian.</p>
+      <p> 7. Library users are subject to voluntary inspection before leaving the library.</p>
+	  <p> 8. Reserved Books may be borrowed one hour at a time or from 11:00 a.m. to 12:00 p.m. or overnight from 5:00 p.m. to 8:00 a.m. the following day.</p>
+	  <p> 9. Fiction books may be borrowed for one week, renewable for another week unless there is a prior demand for these books.</p>
+	  <p> 10.Other books may be borrowed for three (3) days, renewable for another three (3) days unless there is a prior demand for these books by another user.</p>
+	  <p> 11.A student may borrow a maximum of two (2) books at a time.</p>
+	  
+	  <p><strong>Library Fines and Penalties:</strong></p>
+	  <p>For overdue books, the following fines and charges apply:</p>
+	  <p>Fiction books – Php 5.00 a day, including Saturdays, Sundays, and holidays.</p>
+	  <p>Reserved books – Php 10.00 for the first day and Php 20.00 for the succeeding days, including Saturdays, Sundays, and holidays.</p>
+	  <p>A lost book must be reported immediately to avoid accumulation of fines.</p>
+	  <p>A book lost must be paid for or replaced with the same title and a ten percent processing fee. If the book is not available in the market, the borrower must pay the price set by the school plus a ten percent processing fee.</p>
+	  <p>Damaged books beyond reasonable wear must be replaced with another of the same title of the latest edition or paid for at the same price.</p>
+	  <p>Students who fail to observe library regulations and procedures will be referred to the principal for disciplinary action.</p>
+	  <p></p>
+	 
+	 
+	 <input type="checkbox" id="acceptTerms"> I agree to the terms and conditions
+	  <br>
+	  <button id="acceptButton" disabled>Proceed</button>
+	</div>
+  </div>	
+  <div class="container">
+	<div class="tabs">
+	  <a onclick="showSection('availableBooks')">Available Books</a>
+	  <a onclick="showSection('borrowedBooks')">Borrowed Books</a>
+	  <a onclick="showSection('reservedBooks')">Reserved Books</a>
+	</div>
+
+	<div id="availableBooks" class="content-section active">
+
+	  <div class="search-container">
+		<input type="text" id="availableSearchBar" class="searchBar" placeholder="Search for a book...">
+	  </div>
+	  <h2>Category</h2>
+	  <div class="category-section">
+		<div class="category-buttons">
+		  <button onclick="toggleCategory('category-00-99')">0-99 General works</button>
+		  <button onclick="toggleCategory('category-100')">100 Philosophy & Psychology</button>
+		  <button onclick="toggleCategory('category-200')">200 Religion</button>
+		  <button onclick="toggleCategory('category-300')">300 Social Sciences</button>
+		  <button onclick="toggleCategory('category-400')">400 Language</button>
+		  <button onclick="toggleCategory('category-500')">500 Natural Sciences and mathematics</button>
+		  <button onclick="toggleCategory('category-600')">600 Technology (Applied Sciences)</button>
+		  <button onclick="toggleCategory('category-700')">700 Arts and Recreation</button>
+		  <button onclick="toggleCategory('category-800')">800 Literature</button>
+		  <button onclick="toggleCategory('category-900')">900 History and Geography</button>
+		</div>
+
+		<div id="category-00-99" class="book-list" style="display: none;">
+		  <div class="book" data-quantity="5" data-title="The Information">
+			<h3>The Information</h3>
+			<p>Author: James Gleick</p>
+			<p>Available: <span class="quantity">5</span></p>
+			<div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow </button>
+		  
+			</div>
+		  </div>
+		  <div class="book" data-quantity="3" data-title="The Shallows">
+			<h3>The Shallows</h3>
+			<p>Author: Nicholas Carr</p>
+			<p>Available: <span class="quantity">3</span></p>
+			<div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			
+			</div>
+		  </div>
+		  <div class="book" data-quantity="4" data-title="The Library Book">
+			<h3>The Library Book</h3>
+			<p>Author: Susan Orlean</p>
+			<p>Available: <span class="quantity">4</span></p>
+			<div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			
+			</div>
+		  </div>
+		  <div class="book" data-quantity="2" data-title="Freakonomics">
+			<h3>Freakonomics</h3>
+			<p>Author: Steven D. Levitt and Stephen J. Dubner</p>
+			<p>Available: <span class="quantity">1</span></p>
+	<div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			  
+			</div>
+		  </div>
+		  <div class="book" data-quantity="5" data-title="The Code Book">
+			<h3>The Code Book</h3>
+			<p>Author:Simon Singh </p>
+			<p>Available: <span class="quantity">3</span></p>
+			<div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			 
+			</div>
+		  </div>
+		</div>
+
+		<div id="category-100" class="book-list" style="display: none;">
+		  <div class="book" data-quantity="4" data-title="Thinking, Fast and Slow">
+			<h3>Thingking, Fast and Slow</h3>
+			<p>Daniel Kahneman</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Power of Habit">
+			<h3>The Power of Habit</h3>
+			<p>Charles Duhigg</p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Art of Happiness">
+			<h3>The Art of Happiness</h3>
+			<p>Dalai Lama and Howard Cutler</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="Man’s Search for Meaning">
+			<h3>Man’s Search for Meaning</h3>
+			<p>Viktor E. Frankl</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Republic">
+			<h3>The Republic</h3>
+			<p>Plato</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		</div>
+
+		<div id="category-200" class="book-list" style="display: none;">
+			<div class="book" data-quantity="4" data-title="The Bible">
+			<h3>The Bible</h3>
+			<p>Various Authors</p>
+			<p>Available: <span class="quantity">1	</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Qur'an">
+			<h3>The Qur'an</h3>
+			<p>Various Authors</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The God Delusion">
+			<h3>The God Delusion</h3>
+			<p>Richard Dawkins</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Republic">
+			<h3>The Case for Christ</h3>
+			<p>Lee Strobel</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Tao of Pooh">
+			<h3>The Tao of Pooh</h3>
+			<p>Benjamin Hoff</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		</div>
+		
+		<div id="category-300" class="book-list" style="display: none;">
+			 <div class="book" data-quantity="4" data-title="The Tipping Point">
+			<h3>The Tipping Point</h3>
+			<p>Malcolm Gladwell</p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		   <div class="book" data-quantity="4" data-title="Freakonomics">
+			<h3>Freakonomics</h3>
+			<p>Steven D. Levitt and Stephen J. Dubner</p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		   <div class="book" data-quantity="4" data-title="The Social Animal">
+			<h3>The Social Animal</h3>
+			<p>Elliot Aronson</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		   <div class="book" data-quantity="4" data-title="Outliers">
+			<h3>Outliers</h3>
+			<p>Malcolm Gladwell</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		   <div class="book" data-quantity="4" data-title="The Road to Serfdom">
+			<h3>The Road to Serfdom</h3>
+			<p>Friedrich Hayek </p>
+			<p>Available: <span class="quantity">5</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  </div>
+
+		<div id="category-400" class="book-list" style="display: none;">
+			<div class="book" data-quantity="4" data-title="The Elements of Style">
+			<h3>The Elements of Style</h3>
+			<p>William Strunk Jr. and E.B. White</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="Word Power Made Easy">
+			<h3>Word Power Made Easy</h3>
+			<p>Norman Lewis</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+			<div class="book" data-quantity="4" data-title="The Mother Tongue">
+			<h3>The Mother Tongue</h3>
+			<p>Bill Bryson</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="Oxford English Dictionary">
+			<h3>Oxford English Dictionary</h3>
+			<p>Various Authors</p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="On Writing">
+			<h3>On Writing</h3>
+			<p>Stephen King</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+	</div>	  
+		  
+		<div id="category-500" class="book-list" style="display: none;">
+			<div class="book" data-quantity="4" data-title="A Brief History of Time">
+			<h3>A Brief History of Time</h3>
+			<p>Stephen Hawking</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="Cosmos">
+			<h3>Cosmos</h3>
+			<p>Carl Sagan</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Selfish Gene">
+			<h3>The Selfish Gene</h3>
+			<p>Richard Dawkins</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Gene: An Intimate History">
+			<h3>The Gene: An Intimate History</h3>
+			<p>Siddhartha Mukherjee</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  <div class="book" data-quantity="4" data-title="The Origin of Species">
+			<h3>The Origin of Species</h3>
+			<p>Charles Darwin</p>
+			<p>Available: <span class="quantity">3<span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		</div> 
+			
+		<div id="category-600" class="book-list" style="display: none;">
+			<div class="book" data-quantity="4" data-title="The Innovators">
+			<h3>The Innovators</h3>
+			<p>Walter Isaacson</p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Second Machine Age">
+			<h3>The Second Machine Age</h3>
+			<p>Erik Brynjolfsson and Andrew McAfee</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Lean Startup">
+			<h3>The Lean Startup</h3>
+			<p>Eric Ries</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="How We Got to Now">
+			<h3>How We Got to Now</h3>
+			<p>Steven Johnson</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="Out of the Crisis">
+			<h3>Out of the Crisis</h3>
+			<p>W. Edwards Deming</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		</div>
+		
+		<div id="category-700" class="book-list" style="display: none;">
+			<div class="book" data-quantity="4" data-title="The Story of Art">
+			<h3>The Story of Art</h3>
+			<p>E.H. Gombrich</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Goldfinch">
+			<h3>The Goldfinch</h3>
+			<p>Donna Tartt</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The War of Art">
+			<h3>The War of Art</h3>
+			<p>Steven Pressfield</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Art Spirit">
+			<h3>The Art Spirit</h3>
+			<p>Robert Henri</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="Steal Like an Artist">
+			<h3>Steal Like an Artist</h3>
+			<p>Austin Kleon</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+			
+			
+			
+			
+			
+		
+		</div>
+		
+		<div id="category-800" class="book-list" style="display: none;">
+				<div class="book" data-quantity="4" data-title="To Kill a Mockingbird">
+			<h3>To Kill a Mockingbird</h3>
+			<p>Harper Lee</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Great Gatsby">
+			<h3>The Great Gatsby</h3>
+			<p>F. Scott Fitzgerald</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="Moby-Dick">
+			<h3>Moby-Dick</h3>
+			<p>Herman Melville</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="1984">
+			<h3>1984</h3>
+			<p>George Orwell</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Catcher in the Rye">
+			<h3>The Catcher in the Rye</h3>
+			<p>J.D. Salinger</p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+			
+			
+			
+			
+			
+		
+		</div>
+		
+		<div id="category-900" class="book-list" style="display: none;">
+			<div class="book" data-quantity="4" data-title="Sapiens: A Brief History of Humankind">
+			<h3>Sapiens: A Brief History of Humankind</h3>
+			<p>Yuval Noah Harari</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="A People's History of the United States">
+			<h3> A People's History of the United States</h3>
+			<p>Howard Zinn</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The History of the Decline and Fall of the Roman Empire">
+			<h3>The History of the Decline and Fall of the Roman Empire</h3>
+			<p>Edward Gibbon </p>
+			<p>Available: <span class="quantity">3</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Silk Roads">
+			<h3>The Silk Roads</h3>
+			<p>Peter Frankopan</p>
+			<p>Available: <span class="quantity">2</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		  
+		  	<div class="book" data-quantity="4" data-title="The Immortal Life of Henrietta Lacks">
+			<h3>The Immortal Life of Henrietta Lacks</h3>
+			<p>Rebecca Skloot</p>
+			<p>Available: <span class="quantity">1</span></p>
+		   <div class="button-container">
+			  <button onclick="borrowBook(this)">Borrow</button>
+			</div>
+		  </div>
+		
+		
+		</div>
+	  </div>
+	</div>
+
+	<div id="borrowedBooks" class="content-section" style="display: none;">
+	  <div class="search-container">
+		<input type="text" id="borrowedSearchBar" class="searchBar" placeholder="Search for a book...">
+	  </div>
+	  <h2>Borrowed Books</h2>
+	  <div class="book-list" id="borrowedList" style="display: flex; flex-wrap: wrap; gap: 15px;"></div>
+	  <div id="expiredSessions">
+		<h2>Expired Sessions</h2>
+		<div class="expired-sessions" id="expiredList"></div>
+	  </div>
+	</div>
+
+
+	<div id="reservedBooks" class="content-section" style="display: none;">
+	  <div class="search-container">
+		<input type="text" id="reservedSearchBar" class="search-bar" placeholder="Search for a book...">
+	  </div>
+	  <div class="books-container">
+		<div class="books-section">
+		  <h2>Reserved Books</h2>
+		  <div class="book-list" id="reservedList"></div>
+		</div>
+	  </div>
+	</div>
+
+	<div id="profileDashboard" class="content-section" style="display: none;">
+	  <div class="profile-container">
+		<h2>Profile Dashboard</h2>
+		<div class="profile-info">
+		  <div class="profile-field">
+			<label>Name:Josh</label>
+			<input type="text" id="profileName" value="John Doe" readonly>
+		  </div>
+		  <div class="profile-field">
+			<label>ID Number:13142521</label>
+			<input type="text" id="profileId" value="2023-0001" readonly>
+		  </div>
+		  <div class="profile-field">
+			<label>Phone Number:094124214</label>
+			<input type="text" id="profilePhone" value="+63 912 345 6789" readonly>
+		  </div>
+		</div>
+		<button class="logout-btn" onclick="goBack()">Log Out</button>
+	  </div>
+	</div>
+
+	 <script>
+	 
+	 function showCategory() {
+		let bookList = document.getElementById('bookList');
+		bookList.style.display = bookList.style.display == "none" ? "flex" : "none";
+	  }
+
+	  function showSection(sectionId) {
+		document.querySelectorAll('.content-section').forEach(section => {
+		  section.classList.remove('active');
+		  section.style.display = "none";
+		});
+		let section = document.getElementById(sectionId);
+		section.classList.add('active');
+		section.style.display = "block";
+
+		if (sectionId === 'borrowedBooks') {
+		  let borrowedList = document.getElementById('borrowedList');
+		  borrowedList.style.display = 'flex';
+		  borrowedList.style.flexWrap = 'wrap';
+		  borrowedList.style.gap = '15px';
+		  borrowedList.style.opacity = '1';
+		}
+	  }
+
+	  function toggleCategory(categoryId) {
+		const categories = document.querySelectorAll('#availableBooks .book-list');
+		categories.forEach(cat => {
+		  if (cat.id === categoryId) {
+			if (cat.style.display === 'flex') {
+			  cat.style.opacity = '0';
+			  setTimeout(() => cat.style.display = 'none', 300);
+			} else {
+			  cat.style.display = 'flex';
+			  setTimeout(() => cat.style.opacity = '1', 10);
+			}
+		  } else {
+			cat.style.opacity = '0';
+			cat.style.display = 'none';
+		  }
+		});
+	  }
+	
+	  document.addEventListener("DOMContentLoaded", function() {
+	  const modal = document.getElementById("termsModal");
+	  const acceptButton = document.getElementById("acceptButton");
+	  const acceptCheckbox = document.getElementById("acceptTerms");
+	  const closeModal = document.getElementById("closeModal");
+	  
+	  modal.style.display = "flex";
+	  
+	  acceptCheckbox.addEventListener("change", function() {
+		acceptButton.disabled = !this.checked;
+	  });
+	  
+	  acceptButton.addEventListener("click", function() {
+		modal.style.display = "none";
+	  });
+	  
+	  closeModal.addEventListener("click", function() {
+		modal.style.display = "none";
+	  });
+
+      document.getElementById('availableSearchBar').addEventListener('keyup', function() {
+        searchBooks('availableBooks');
+      });
+
+      document.getElementById('borrowedSearchBar').addEventListener('keyup', function() {
+        searchBooks('borrowedBooks');
+      });
+
+      document.getElementById('reservedSearchBar').addEventListener('keyup', function() {
+        searchBooks('reservedBooks');
+      });
+    });
+
+    function searchBooks(sectionId) {
+      const searchBar = document.getElementById(sectionId === 'availableBooks' ? 'availableSearchBar' : 
+                                              (sectionId === 'borrowedBooks' ? 'borrowedSearchBar' : 'reservedSearchBar'));
+      const filter = searchBar.value.toLowerCase();
+      const section = document.getElementById(sectionId);
+      const books = section.querySelectorAll('.book');
+      
+      books.forEach(function(book) {
+        const title = book.querySelector('h3').textContent.toLowerCase();
+        const author = book.querySelector('p').textContent.toLowerCase();
+        if (title.includes(filter) || author.includes(filter)) {
+          book.style.display = "block";
+        } else {
+          book.style.display = "none";
+        }
+      });
+    }
+
+	  function borrowBook(button) {
+		let book = button.closest('.book');
+		if (!book) {
+		  alert("Error: Unable to find book container.");
+		  return;
+		}
+
+		let quantitySpan = book.querySelector('.quantity');
+		if (!quantitySpan) {
+		  alert("Error: Unable to find book quantity.");
+		  return;
+		}
+
+		let quantity = parseInt(quantitySpan.textContent);
+		if (isNaN(quantity)) {
+		  alert("Error: Invalid quantity value.");
+		  return;
+		}
+
+		if (quantity <= 0) {
+		  alert("No copies available");
+		  return;
+		}
+
+		let borrowerName = prompt("Enter borrower's name:");
+		if (!borrowerName) return;
+
+		let gradeLevel = prompt("Enter grade level:");
+		if (!gradeLevel) return;
+
+		let num = prompt("Enter Phone Number:");
+		if (!num) return;
+
+		let dueDateStr = prompt("Enter Expected Return (MM/DD/YYYY):", "");
+		if (!dueDateStr) return;
+
+		let OutSide = prompt("Borrow Inside School or Borrow Outside School")
+		if (!OutSide) return;
+
+		let dueDate = new Date(dueDateStr);
+		if (isNaN(dueDate.getTime())) {
+		  alert("Invalid date format. Please use MM/DD/YYYY");
+		  return;
+		}
+
+		quantity--;
+		quantitySpan.textContent = quantity;
+
+		let borrowTime = new Date();
+		let bookClone = book.cloneNode(true);
+		bookClone.querySelectorAll('button').forEach(btn => btn.remove());
+
+		let formattedBorrowTime = borrowTime.toLocaleDateString('en-US', {
+		  month: 'long',
+		  day: 'numeric',
+		  year: 'numeric'
+		});
+
+		let borrowerInfo = document.createElement('div'); // Container for borrower details
+
+		let borrowerNameEl = document.createElement('p');
+		borrowerNameEl.textContent = `Borrower: ${borrowerName}`;
+		borrowerNameEl.style.marginBottom = "10px"; // Adds space below
+
+		let gradeLevelEl = document.createElement('p');
+		gradeLevelEl.textContent = `Grade: ${gradeLevel}`;
+		gradeLevelEl.style.marginBottom = "10px";
+
+		let borrowTimeEl = document.createElement('p');
+		borrowTimeEl.textContent = `Borrowed: ${formattedBorrowTime}`;
+		borrowTimeEl.style.marginBottom = "10px";
+
+		let locationEl = document.createElement('p');
+		locationEl.textContent = `Borrowed location: ${OutSide}`;
+		locationEl.style.marginBottom = "10px";
+
+		let dueDateEl = document.createElement('p');
+		dueDateEl.textContent = `Due: ${dueDateStr}`;
+		dueDateEl.style.marginBottom = "10px";
+
+		let phoneEl = document.createElement('p');
+		phoneEl.textContent = `Phone: ${num}`;
+
+		borrowerInfo.appendChild(borrowerNameEl);
+		borrowerInfo.appendChild(gradeLevelEl);
+		borrowerInfo.appendChild(borrowTimeEl);
+		borrowerInfo.appendChild(locationEl);
+		borrowerInfo.appendChild(dueDateEl);
+		borrowerInfo.appendChild(phoneEl);
+
+		bookClone.appendChild(borrowerInfo);
+
+
+		let dueDateInfo = document.createElement('p');
+		dueDateInfo.className = 'due-date';
+		dueDateInfo.dataset.dueDate = dueDate.getTime();
+		dueDateInfo.dataset.timerId = setInterval(() => updateBookTimer(dueDateInfo), 1000);
+		bookClone.appendChild(dueDateInfo);
+
+		let returnButton = document.createElement('button');
+		returnButton.textContent = 'Return';
+		returnButton.onclick = function () {
+		  returnBook(this, book);
+		};
+		bookClone.appendChild(returnButton);
+
+		let borrowedList = document.getElementById('borrowedList');
+
+		let availableElement = bookClone.querySelector('.quantity');
+		if (availableElement) {
+		let availableContainer = availableElement.closest('p'); 
+		if (availableContainer && availableContainer.textContent.includes("Available")) {
+		availableContainer.remove(); 
+		} else {
+		availableElement.remove(); 
+		}
+        }
+
+		bookClone.style.display = 'flex';
+		borrowedList.appendChild(bookClone);
+
+		showSection('borrowedBooks');
+		updateBookTimer(dueDateInfo);
+	  }
+
+	  function updateBookTimer(dueDateElement) {
+		const now = new Date().getTime();
+		const dueDate = parseInt(dueDateElement.dataset.dueDate);
+		const timeLeft = dueDate - now;
+
+		if (timeLeft <= 0) {
+		  dueDateElement.style.color = 'red';
+		  dueDateElement.textContent = 'OVERDUE!';
+		  if (!dueDateElement.dataset.notified) {
+			alert('A book is overdue!');
+			dueDateElement.dataset.notified = 'true';
+		  }
+		} else {
+		  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+		  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+		  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+		  dueDateElement.style.color = days < 1 ? 'orange' : 'green';
+		  dueDateElement.textContent = `Due in: ${days}d ${hours}hrs ${minutes}mins ${seconds}s`;
+		}
+	  }	
+
+	  function toggleProfileMenu() {
+		const menu = document.getElementById('profileMenu');
+        if (menu) {
+		  menu.classList.toggle('active');
+        }
+	  }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        let reservedBooks = [
+          { title: "The Evolution Of Filipino Fashion and Its Cultural Significance Among Teens", author: "Sabrido et al. 2024" },
+          { title: "The Proper Utilization of Computer Usage and Comprehensive Information Skills Among TVL-ICT Students at Golden Success College in Cebu", author: "Bendijo et al. 2024" }
+        ];
+
+        function updateReservedBooksDisplay() {
+          let reservedList = document.getElementById("reservedList");
+          if (!reservedList) return;
+
+          reservedList.innerHTML = "";
+
+          reservedBooks.forEach(book => {
+            let bookDiv = document.createElement("div");
+            bookDiv.className = "book reserved-book";
+            bookDiv.dataset.title = book.title; 
+            bookDiv.innerHTML = `
+              <h3>${book.title}</h3>
+              <p>Author: ${book.author}</p>
+              <p style="color: red; font-weight: bold;">Not Available for Borrowing</p>
+            `;
+            reservedList.appendChild(bookDiv);
+          });
+
+          reservedList.style.display = "flex";
+          reservedList.style.flexWrap = "wrap";
+          reservedList.style.gap = "15px";
+        }
+
+        updateReservedBooksDisplay();
+        
+        const reservedTab = document.querySelector('.tabs a:nth-child(3)');
+        if (reservedTab) {
+          reservedTab.addEventListener('click', updateReservedBooksDisplay);
+        }
+      });
+
+      function returnBook(button, originalBook) {
+        let borrowedBook = button.parentElement;
+        let expiredList = document.getElementById('expiredList');
+        
+        let dueDateElement = borrowedBook.querySelector('.due-date');
+        if (dueDateElement && dueDateElement.dataset.timerId) {
+          clearInterval(parseInt(dueDateElement.dataset.timerId));
+        }
+
+        borrowedBook.remove();
+        let returnedBook = borrowedBook.cloneNode(true);
+        returnedBook.querySelectorAll('button').forEach(btn => btn.remove());
+        
+        let expiredDueDateElement = returnedBook.querySelector('.due-date');
+        if (expiredDueDateElement) {
+          expiredDueDateElement.remove();
+        }
+        expiredList.appendChild(returnedBook);
+
+        let quantitySpan = originalBook.querySelector('.quantity');
+        let quantity = parseInt(quantitySpan.textContent);
+        quantity++;
+        quantitySpan.textContent = quantity;
+      }
+    
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('menuButton').addEventListener('click', function () {
+          const sidebar = document.getElementById('sidebar');
+          sidebar.classList.toggle('active');
+        });
+      });
+
+      document.addEventListener('click', function (event) {
+        const sidebar = document.getElementById('sidebar');
+        const menuButton = document.getElementById('menuButton');
+
+        if (!sidebar.contains(event.target) && event.target !== menuButton) {
+          sidebar.classList.remove('active');
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('changeProfilePicture').addEventListener('click', function () {
+          document.getElementById('profilePictureUpload').click();
+        });
+
+        document.getElementById('profilePictureUpload').addEventListener('change', function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById('profilePicture').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+
+      document.getElementById('logoutLink').addEventListener('click', function () {
+        alert('Logging out...');
+        window.location.href = 'Index.html';
+      });
+
+      function goBack() {
+        window.location.href = 'Index.html';
+      }
+	 </script>
+</body>
+
+</html>

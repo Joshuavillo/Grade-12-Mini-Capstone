@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url('https://lh3.googleusercontent.com/d/1NEzu-TeF3yReKk0u6ai_4DczOBuhRJ5z=w1000'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  border: 3px solid #f1f1f1;
+  background: rgba(255, 255, 255, 0.9); 
+  width: 40%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px gray;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: green;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.Librarian {
+  background-color:   rgba(0, 0, 255, 0.6);
+  color: white;
+  }
+
+
+button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 30px 0;
+}
+
+img.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px gray;
+  text-align: center;
+}
+
+.modal-content select{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  form, .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+  
+  img.avatar {
+    width: 120px;
+  }
+  
+  button {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+</style>
+</head>
+<body>
+<form id="loginForm">
+  <div class="imgcontainer">
+    <img src="https://lh3.googleusercontent.com/d/1ND0gbYC4SXFcU6dPbZHlrWH4QytKszrY=w200" alt="Avatar" class="avatar">
+    <h2>Golden Success College Cebu Online Library</h2>
+  </div>
+  
+  <div class="container">
+    <label for="idNumber"><b>ID Number</b></label>
+    <input type="text" id="idNumber" placeholder="Enter ID Number" name="idNumber" required>
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" id="password" placeholder="Enter Password" name="password" required>
+        
+    <button type="button" id="studentLogin">Log in as a Student</button>
+    <button type="button" id="librarianLogin" class="Librarian">Log in as a Librarian</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+    <p>Don't have an account? <a href="#" id="openSignupModal">Sign up here</a>.</p>
+    <div class="container" style="background-color:#f1f1f1; padding:10px; border-radius:5px;">
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </div>
+</form>
+
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span id="closeSignupModal" class="close">&times;</span>
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <label for="fullName"><b>Full Name</b></label>
+      <input type="text" placeholder="Enter Email" id="fullName" name="fullName" required>
+
+      <label for="idNumberSignup"><b>ID Number</b></label>
+      <input type="text" placeholder="Enter Student ID" id="idNumberSignup" name="idNumberSignup" required>
+
+      <label for="passwordSignup"><b>Password</b></label>
+      <input type="password" placeholder="Create Password" id="passwordSignup" name="passwordSignup" required>
+
+      <label for="role"><b>Role:</b></label>
+      <select id="role" name="role" required>
+        <option value="student">Student</option>
+        <option value="librarian">Librarian</option> 
+      </select>
+
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Open Sign-Up Modal
+document.getElementById('openSignupModal')?.addEventListener('click', function (event) {
+    event.preventDefault();
+    document.getElementById('signupModal').style.display = 'flex';
+});
+
+document.getElementById('closeSignupModal')?.addEventListener('click', function () {
+    document.getElementById('signupModal').style.display = 'none';
+});
+
+window.addEventListener('click', function (event) {
+    const modal = document.getElementById('signupModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+document.getElementById('signupForm')?.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const fullName = document.getElementById('fullName').value;
+    const idNumber = document.getElementById('idNumberSignup').value;
+    const password = document.getElementById('passwordSignup').value;
+    const role = document.getElementById('role').value;
+
+    const user = {
+        fullName,
+        idNumber,
+        password,
+        role,
+        loginCount: 0,
+        lastLogin: null,
+        dashboardVisits: 0
+    };
+
+    localStorage.setItem('user', JSON.stringify(user));
+    alert('Sign up successful! Please log in.');
+    document.getElementById('signupModal').style.display = 'none';
+});
+
+document.getElementById('studentLogin')?.addEventListener('click', function () {
+    const idNumber = document.getElementById('idNumber').value;
+    const password = document.getElementById('password').value;
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.idNumber === idNumber && user.password === password && user.role === 'student') {
+        user.loginCount++;
+        user.lastLogin = new Date().toLocaleString();
+        localStorage.setItem('user', JSON.stringify(user));
+
+        alert('Student login successful!');
+        window.location.href = 'StudentUI.html';
+    } else {
+        alert('Invalid ID number, password, or role.');
+    }
+});
+
+document.getElementById('librarianLogin')?.addEventListener('click', function () {
+    const idNumber = document.getElementById('idNumber').value;
+    const password = document.getElementById('password').value;
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.idNumber === idNumber && user.password === password && user.role === 'librarian') {
+        user.loginCount++;
+        user.lastLogin = new Date().toLocaleString();
+        localStorage.setItem('user', JSON.stringify(user));
+
+        alert('Librarian login successful!');
+        window.location.href = 'Lib UI.html';
+    } else {
+        alert('Invalid ID number, password, or role.');
+    }
+});
+</script>
+
+</body>
+</html>
